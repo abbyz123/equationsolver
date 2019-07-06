@@ -2,7 +2,7 @@
 class EquationParser {
     constructor() {
         // features needed for parser
-        this.operators = {                      // operators and their precedence
+        this.operators = {                      // operators and their priority
             '=' : 0,
             '+' : 1,
             '-' : 1,
