@@ -160,6 +160,7 @@ rl.on('line', (line) => {
     parser = new EquationParser();
     try {
         polynomial = parser.parse(equationString);
+        console.log('parsed polynomial object: ');
         console.log(polynomial);
         EquationSolver(polynomial);                 // solve the equation
     } catch (err) {
