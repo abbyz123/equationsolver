@@ -126,7 +126,7 @@ function EquationSolver(polynomial) {
             if (s !== "const") {
                 if (1 === unknownNum) {
                     let solvedSym = rhs / polynomial[s];
-                    console.log(s + " = " + String(solvedSym));
+                    console.log(s + " = " + String(solvedSym) + '[SOLVED]');
                 } else {
                     // lazy implementation to random assign a number 
                     // if there is more than one unknown
@@ -134,7 +134,7 @@ function EquationSolver(polynomial) {
                     // with a number
                     let solvedSym = Math.floor(Math.random() * 10);
                     rhs -= (solvedSym * polynomial[s]);
-                    console.log(s + " = " + String(solvedSym));
+                    console.log(s + " = " + String(solvedSym) + ' [RANDOM]');
                     unknownNum -= 1;
                 }
             }
@@ -153,12 +153,15 @@ const rl = readline.createInterface({
 // Start the CLI for equation input
 rl.prompt();
 rl.on('line', (line) => {
+    // equation as a string
     equationString = line.trim();
+
+    // create a new equation parser
     parser = new EquationParser();
     try {
         polynomial = parser.parse(equationString);
         console.log(polynomial);
-        EquationSolver(polynomial);
+        EquationSolver(polynomial);                 // solve the equation
     } catch (err) {
         console.log(err);
     }  
