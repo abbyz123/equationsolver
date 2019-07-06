@@ -49,8 +49,12 @@ class EquationParser {
     parse(equation) {
         for (let i = 0; i < equation.length; i++) {
             let curr = equation[i];
+            // ignore spaces or tabs
+            if (' ' == curr || '\t' == curr) {
+                continue;
+            }
             // parse a number
-            if (!isNaN(curr)) {
+            else if (!isNaN(curr)) {
                 if ("const" === this.currSym) {
                     if (!this.dotOcurr) {
                         this.currNum = this.currNum * 10 + parseFloat(curr);
@@ -90,8 +94,12 @@ class EquationParser {
                     this.currSign *= (-1);
                 }
                 if ('=' === curr) {
-                    this.equalOcurr = true;
-                    this.currSign = -1;
+                    if (!this.equalOcurr) {
+                        this.equalOcurr = true;
+                        this.currSign = -1;
+                    } else {
+                        throw "duplicate equal sign"
+                    }
                 }
             }
             // parse symbol
